@@ -1,36 +1,31 @@
-int getCommon(int* nums1, int nums1Size, int* nums2, int nums2Size){
-    int p1 = 0, p2 = 0 ;
-    int n1 = nums1Size ; 
-    int n2 = nums2Size ;
-    while(p1 < n1 || p2 < n2){
-        if(p1 == n1 ){
-            if( nums2[p2] > nums1[n1-1] )
-                return -1 ;
-            else{
-                for(int i = p2 ; i < n2 ; i++){
-                    if(nums2[i] == nums1[n1-1])
-                        return nums2[i] ;
-                }
-                return -1 ;
-            }
+int getCommon(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+    // Function to find the first common element in two sorted arrays
+
+    // Initialize pointers to iterate through the arrays
+    int p1 = 0, p2 = 0;
+
+    // Track the sizes of the arrays
+    int n1 = nums1Size;
+    int n2 = nums2Size;
+
+    // Loop until either pointer reaches the end of its array
+    while (p1 < n1 && p2 < n2) {
+        // Compare elements at current positions
+        if (nums1[p1] == nums2[p2]) {
+            // Found a common element, return it
+            return nums1[p1];
         }
-        if(p2 == n2 ){
-            if( nums1[p1] > nums2[n2-1] )
-                return -1 ;
-            else{
-                for(int i = p1 ; i < n1 ; i++){
-                    if(nums1[i] == nums2[n2-1])
-                        return nums1[i] ;
-                }
-                return -1 ;
-            }
-        }
-        if(nums1[p1] == nums2[p2])
-            return nums1[p1] ;
-        if(nums1[p1] < nums2[p2])
+
+        // Advance pointers based on the comparison
+        // Move p1 if nums1[p1] is smaller
+        if (nums1[p1] < nums2[p2]) {
             p1++;
-        else
+        } else {
+            // Move p2 if nums1[p1] is larger
             p2++;
+        }
     }
-    return -1 ;
+
+    // No common element found, return -1
+    return -1;
 }
